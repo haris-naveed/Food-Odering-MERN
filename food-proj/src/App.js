@@ -27,7 +27,7 @@ function App() {
     setProfile(JSON.parse(localStorage.getItem('user')))
     console.log(user,profile)
 
-  },[user,profile]);
+  },[user]);
 
   
   const [cartIsShown,setCartIsShown]=useState(true);
