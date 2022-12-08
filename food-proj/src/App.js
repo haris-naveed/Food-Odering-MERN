@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import {useDispatch ,useSelector } from 'react-redux'
 import getAllPizzas from './actions/pizzaAction'
 import Header from './components/HEADER/Header';
@@ -9,21 +9,25 @@ import Cart from './components/CART/Cart';
 
 
 import CartProvider from './store/CartProvider';
-import { useState } from 'react';
 import SignIn from './components/signup/signIn';
+import { Auth } from './components/AUTH/Auth';
 
 
 function App() {
   
   const dispatch=useDispatch();
- const pizzas=useSelector((state)=>state)
+  const user=useSelector((state)=>state?.AuthReducer?.authData);
+  const [profile,setProfile]=useState(JSON.parse(localStorage.getItem('user')));
 
  
   useEffect(()=>{
     dispatch(getAllPizzas())
-    console.log(pizzas);
+    if(!user)
+    setProfile(null)
+    setProfile(JSON.parse(localStorage.getItem('user')))
+    console.log(user,profile)
 
-  },[]);
+  },[user,profile]);
 
   
   const [cartIsShown,setCartIsShown]=useState(true);
@@ -38,10 +42,14 @@ function App() {
   }
   return (
 <CartProvider>
-  <SignIn/>
-  {cartIsShown && <Cart onClose={HideCartHandler}/>}
+  {/* <SignIn/> */}
+  {/* {cartIsShown && <Cart onClose={HideCartHandler}/>} */}
 <Header onShowCart={showCartHandler}/>
-<Meals/>
+{
+  profile?.result?<Meals/>:<Auth/>
+}
+  {/* <Auth/>
+<Meals/> */}
 </CartProvider>
   );
 }
