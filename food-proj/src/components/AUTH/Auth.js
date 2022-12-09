@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -17,6 +17,10 @@ import { signin, signup } from "../../actions/Auth";
 export const Auth = () => {
 
   const dispatch=useDispatch();
+
+  useEffect(()=>{
+    dispatch({type:"LOGOUT"});
+  },[])
 
   const initialState={
     firstName:"",

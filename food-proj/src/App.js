@@ -27,7 +27,7 @@ function App() {
     setProfile(JSON.parse(localStorage.getItem('user')))
     console.log(user,profile)
 
-  },[user]);
+  },[user,dispatch]);
 
   
   const [cartIsShown,setCartIsShown]=useState(true);
@@ -46,7 +46,7 @@ function App() {
   {/* {cartIsShown && <Cart onClose={HideCartHandler}/>} */}
 <Header onShowCart={showCartHandler}/>
 {
-  profile?.result?<Meals/>:<Auth/>
+  (profile?.result)?<Meals/>:<Auth/>
 }
   {/* <Auth/>
 <Meals/> */}
