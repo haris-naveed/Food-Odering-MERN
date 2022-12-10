@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 const Header = (props) => {
 
-    const dispatch=useDispatch();
+    // const dispatch=useDispatch();
     const data=useSelector((state)=>state.getAllPizzaReducer.pizzas);
     const datas=useSelector((state)=>state);
 
@@ -17,8 +17,10 @@ const Header = (props) => {
     }, [data,datas])
 
     const Logout=()=>{
-        // console.log("i am clicked");
-        dispatch({type:'LOGOUT'});
+        console.log("i am clicked");
+
+       props.dispatch({type:'LOGOUT'});
+
     }
     
     return (

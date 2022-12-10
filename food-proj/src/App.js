@@ -19,6 +19,7 @@ function App() {
   const user=useSelector((state)=>state?.AuthReducer?.authData);
   const [profile,setProfile]=useState(JSON.parse(localStorage.getItem('user')));
 
+  
  
   useEffect(()=>{
     dispatch(getAllPizzas())
@@ -27,6 +28,7 @@ function App() {
     setProfile(JSON.parse(localStorage.getItem('user')))
     console.log(user,profile)
 
+    console.log("i am here")
   },[user,dispatch]);
 
   
@@ -44,9 +46,9 @@ function App() {
 <CartProvider>
   {/* <SignIn/> */}
   {/* {cartIsShown && <Cart onClose={HideCartHandler}/>} */}
-<Header onShowCart={showCartHandler}/>
+<Header dispatch={dispatch} onShowCart={showCartHandler}/>
 {
-  (profile?.result)?<Meals/>:<Auth/>
+  (profile?.result) ?<Meals/>:<Auth/>
 }
   {/* <Auth/>
 <Meals/> */}
